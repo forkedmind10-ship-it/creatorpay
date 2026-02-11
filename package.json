@@ -1,0 +1,32 @@
+{
+  "name": "creatorpay",
+  "version": "0.1.0",
+  "description": "Creator micropayment platform for AI agents",
+  "main": "simple-server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node simple-server.js",
+    "dev": "nodemon simple-server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "keywords": [
+    "creator-economy",
+    "micropayments",
+    "ai-agents", 
+    "x402",
+    "base-l2",
+    "mcp"
+  ],
+  "author": "CreatorPay Team",
+  "license": "MIT"
+}
