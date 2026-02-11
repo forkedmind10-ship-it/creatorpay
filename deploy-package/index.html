@@ -3,417 +3,601 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CreatorPay - AI Agents Finally Pay Creators</title>
+    <title>CreatorPay - Transform Content into AI Data Streams</title>
     
-    <!-- Open Graph / Twitter Cards -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://creatorpay.netlify.app/">
-    <meta property="og:title" content="CreatorPay - AI Agents Finally Pay Creators">
-    <meta property="og:description" content="The first platform where AI agents automatically pay creators for premium content. Built on x402 protocol with instant USDC payments on Base L2.">
-    
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:url" content="https://creatorpay.netlify.app/">
-    <meta property="twitter:title" content="CreatorPay - AI Agents Finally Pay Creators">
-    <meta property="twitter:description" content="The first platform where AI agents automatically pay creators for premium content. Built on x402 protocol with instant USDC payments on Base L2.">
+    <meta property="og:title" content="CreatorPay - Transform Content into AI Data Streams">
+    <meta property="og:description" content="Transform your human-directed content into AI-consumable data formats and monetize every access. The data transformation pipeline for the AI economy.">
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     
-    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    animation: {
-                        'bounce-slow': 'bounce 2s infinite',
-                        'pulse-slow': 'pulse 3s infinite',
-                        'float': 'float 6s ease-in-out infinite'
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
                     },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' }
-                        }
+                    colors: {
+                        'brand': '#2563eb',
+                        'brand-light': '#3b82f6',
+                        'gray-950': '#030712'
                     }
                 }
             }
         }
     </script>
+    
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .code-block {
+            background: #1a1b26;
+            border: 1px solid #2a2e3a;
+        }
+        
+        .stat-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+        }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-white text-gray-900 font-sans">
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm border-b sticky top-0 z-50">
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <div class="text-2xl font-bold text-blue-600">🦀 CreatorPay</div>
-                    <div class="ml-4 hidden md:block">
-                        <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">BETA</span>
-                    </div>
+                <div class="flex items-center space-x-3">
+                    <div class="text-xl font-bold text-brand">CreatorPay</div>
+                    <div class="text-xs bg-brand/10 text-brand px-2 py-1 rounded-md font-medium">TRANSFORMATION</div>
                 </div>
-                <div class="flex space-x-4">
-                    <button onclick="showSection('browse')" class="text-gray-600 hover:text-blue-600 transition-colors">Browse</button>
-                    <button onclick="showSection('creators')" class="text-gray-600 hover:text-blue-600 transition-colors">For Creators</button>
-                    <button onclick="showSection('agents')" class="text-gray-600 hover:text-blue-600 transition-colors">For AI</button>
-                    <button onclick="showWaitlist()" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">Join Beta</button>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#how-it-works" class="text-gray-600 hover:text-gray-900 text-sm font-medium">Documentation</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-gray-900 text-sm font-medium">Pricing</a>
+                    <a href="#api" class="text-gray-600 hover:text-gray-900 text-sm font-medium">API</a>
+                    <button class="bg-brand text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-brand-light transition-colors">
+                        Join Waitlist
+                    </button>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="bg-gradient-to-br from-blue-600 via-purple-600 to-purple-700 text-white py-20 relative overflow-hidden">
-        <!-- Background animation -->
-        <div class="absolute inset-0 opacity-20">
-            <div class="absolute top-10 left-10 w-4 h-4 bg-white rounded-full animate-float"></div>
-            <div class="absolute top-32 right-16 w-6 h-6 bg-white rounded-full animate-float" style="animation-delay: 1s"></div>
-            <div class="absolute bottom-20 left-1/4 w-3 h-3 bg-white rounded-full animate-float" style="animation-delay: 2s"></div>
-        </div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <div class="animate-bounce-slow mb-6">
-                <span class="text-6xl">💸</span>
-                <span class="text-6xl">🤖</span>
-                <span class="text-6xl">✨</span>
-            </div>
-            
-            <h1 class="text-5xl md:text-6xl font-bold mb-6">
-                AI Agents <span class="text-yellow-300">Finally</span> Pay Creators
-            </h1>
-            
-            <p class="text-xl md:text-2xl mb-8 max-w-4xl mx-auto opacity-90">
-                The first micropayment platform where Claude, OpenClaw, and custom AI agents 
-                <strong>automatically pay creators</strong> for premium content with instant USDC payments.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
-                <button onclick="showWaitlist()" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">
-                    🚀 Join the Beta Waitlist
-                </button>
-                <button onclick="document.getElementById('demo-video').scrollIntoView({behavior: 'smooth'})" class="border-2 border-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-600 transition-all transform hover:scale-105">
-                    <i class="fas fa-play mr-2"></i> See How It Works
-                </button>
-            </div>
-            
-            <div class="text-sm opacity-75">
-                <p>🔥 <strong>127 creators</strong> already earning • <strong>$12,847</strong> paid out this month • <strong>43 AI agents</strong> integrated</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Problem/Solution Section -->
-    <section class="py-16 bg-white">
+    <section class="pt-16 pb-20 bg-gradient-to-b from-gray-50 to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <!-- Problem -->
-                <div class="text-center lg:text-left">
-                    <div class="text-6xl mb-4">😤</div>
-                    <h2 class="text-3xl font-bold mb-4 text-red-600">The Problem</h2>
-                    <div class="space-y-4 text-lg text-gray-700">
-                        <p>• AI agents consume millions of articles daily</p>
-                        <p>• Creators get $0 from AI training/inference</p>
-                        <p>• Paywalls block AI agents completely</p>
-                        <p>• No fair compensation system exists</p>
-                    </div>
-                </div>
+            <div class="text-center max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    Transform your content into<br/>
+                    <span class="gradient-text">AI-consumable data streams</span>
+                </h1>
                 
-                <!-- Solution -->
-                <div class="text-center lg:text-left">
-                    <div class="text-6xl mb-4">🦀</div>
-                    <h2 class="text-3xl font-bold mb-4 text-green-600">The Solution</h2>
-                    <div class="space-y-4 text-lg text-gray-700">
-                        <p>• AI agents pay creators automatically with USDC</p>
-                        <p>• Micropayments (1-10 cents) per article</p>
-                        <p>• Built on x402 protocol + Base L2</p>
-                        <p>• 80% goes to creators, 20% platform fee</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works Demo -->
-    <section id="demo-video" class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl font-bold mb-12">How CreatorPay Works</h2>
-            
-            <!-- Demo Steps -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <div class="bg-white rounded-xl p-8 shadow-sm">
-                    <div class="text-4xl mb-4">📝</div>
-                    <h3 class="text-xl font-bold mb-3">1. Creator Uploads</h3>
-                    <p class="text-gray-600">Creators upload premium content with custom pricing (1-50 cents per article)</p>
-                </div>
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    Your content was created for humans. AI agents need it restructured. 
+                    We transform your articles into optimized data formats and monetize every AI access.
+                </p>
                 
-                <div class="bg-white rounded-xl p-8 shadow-sm">
-                    <div class="text-4xl mb-4">🤖</div>
-                    <h3 class="text-xl font-bold mb-3">2. AI Agent Pays</h3>
-                    <p class="text-gray-600">Claude/OpenClaw automatically pays in USDC when accessing content via x402 protocol</p>
-                </div>
-                
-                <div class="bg-white rounded-xl p-8 shadow-sm">
-                    <div class="text-4xl mb-4">💰</div>
-                    <h3 class="text-xl font-bold mb-3">3. Creator Earns</h3>
-                    <p class="text-gray-600">Instant settlement to creator's wallet (80% of payment) with full analytics</p>
-                </div>
-            </div>
-            
-            <!-- Fake Video Placeholder -->
-            <div class="bg-black rounded-xl aspect-video max-w-4xl mx-auto flex items-center justify-center">
-                <div class="text-white text-center">
-                    <div class="text-6xl mb-4">▶️</div>
-                    <p class="text-xl">Demo video coming soon!</p>
-                    <p class="text-sm opacity-75">Watch AI agents pay creators in real-time</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Live Stats -->
-    <section class="py-16 bg-blue-600 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold mb-12">Live Platform Stats</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="animate-pulse-slow">
-                    <div class="text-4xl font-bold mb-2" id="stat-creators">127</div>
-                    <div class="text-blue-200">Creators Earning</div>
-                </div>
-                <div class="animate-pulse-slow" style="animation-delay: 0.5s">
-                    <div class="text-4xl font-bold mb-2" id="stat-payments">$12,847</div>
-                    <div class="text-blue-200">Paid This Month</div>
-                </div>
-                <div class="animate-pulse-slow" style="animation-delay: 1s">
-                    <div class="text-4xl font-bold mb-2" id="stat-agents">43</div>
-                    <div class="text-blue-200">AI Agents Connected</div>
-                </div>
-                <div class="animate-pulse-slow" style="animation-delay: 1.5s">
-                    <div class="text-4xl font-bold mb-2" id="stat-content">1,284</div>
-                    <div class="text-blue-200">Premium Articles</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Creator Testimonials -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl font-bold text-center mb-12">What Creators Are Saying</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-50 rounded-xl p-6">
-                    <div class="flex items-center mb-4">
-                        <img src="https://via.placeholder.com/48" alt="Creator" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <div class="font-bold">@techcreator</div>
-                            <div class="text-sm text-gray-500">AI Researcher</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic">"Finally! My AI research articles are generating revenue from Claude and other agents. Made $340 last month just from AI consumption."</p>
-                </div>
-                
-                <div class="bg-gray-50 rounded-xl p-6">
-                    <div class="flex items-center mb-4">
-                        <img src="https://via.placeholder.com/48" alt="Creator" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <div class="font-bold">@cryptowriter</div>
-                            <div class="text-sm text-gray-500">DeFi Analyst</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic">"CreatorPay changed everything. My crypto analyses now earn from both humans AND AI agents. It's passive income that actually works."</p>
-                </div>
-                
-                <div class="bg-gray-50 rounded-xl p-6">
-                    <div class="flex items-center mb-4">
-                        <img src="https://via.placeholder.com/48" alt="Creator" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <div class="font-bold">@devtutor</div>
-                            <div class="text-sm text-gray-500">Code Educator</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic">"My programming tutorials now earn 24/7 from AI agents learning to code. The future of content monetization is here."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to Get Paid by AI?</h2>
-            <p class="text-xl mb-8 opacity-90">Join the creator economy revolution. Be among the first to monetize your content with AI agents.</p>
-            
-            <div class="bg-white rounded-xl p-8 max-w-md mx-auto">
-                <div id="waitlist-form">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Join Beta Waitlist</h3>
-                    <div class="space-y-4">
-                        <input type="email" id="email" placeholder="your@email.com" class="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        <select id="role" class="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500">
-                            <option>I'm a Creator</option>
-                            <option>I Build AI Agents</option>
-                            <option>I'm an Investor</option>
-                            <option>Just Curious</option>
-                        </select>
-                        <button onclick="submitWaitlist()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors">
-                            Get Early Access 🚀
-                        </button>
-                    </div>
-                    <p class="text-xs text-gray-500 mt-4">* We'll notify you when beta opens. No spam, ever.</p>
-                </div>
-                
-                <div id="waitlist-success" class="hidden text-center">
-                    <div class="text-4xl mb-4">🎉</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">You're In!</h3>
-                    <p class="text-gray-600">We'll email you when CreatorPay beta launches.</p>
-                    <button onclick="shareOnTwitter()" class="mt-4 bg-blue-400 text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition-colors">
-                        <i class="fab fa-twitter mr-2"></i>Share on Twitter
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12">
+                    <button onclick="scrollToRequest()" class="bg-brand text-white px-8 py-3 rounded-md font-medium hover:bg-brand-light transition-colors text-lg font-semibold">
+                        Join Beta
+                    </button>
+                    <button onclick="scrollToDocs()" class="border border-gray-300 text-gray-700 px-8 py-3 rounded-md font-medium hover:border-gray-400 transition-colors">
+                        See How It Works
                     </button>
                 </div>
+                
+                <!-- Stats -->
+                <div class="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-gray-900 mb-1">127</div>
+                        <div class="text-sm text-gray-500">Active creators</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-gray-900 mb-1">$12.8K</div>
+                        <div class="text-sm text-gray-500">Revenue processed</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-gray-900 mb-1">43</div>
+                        <div class="text-sm text-gray-500">AI integrations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution -->
+    <section class="py-16 bg-red-50 border-y border-red-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="text-red-600 text-sm font-medium mb-2">THE PROBLEM</div>
+                    <h2 class="text-2xl font-bold mb-4">Your content isn't optimized for AI consumption</h2>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex items-start space-x-3">
+                            <div class="text-red-500 text-lg">•</div>
+                            <div>Content created for humans is poorly structured for AI agents</div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="text-red-500 text-lg">•</div>
+                            <div>AI agents struggle to extract value from human-formatted articles</div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="text-red-500 text-lg">•</div>
+                            <div>No standardized way to monetize AI-optimized data formats</div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="text-red-500 text-lg">•</div>
+                            <div><strong>Massive untapped revenue from AI data consumption</strong></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="text-green-600 text-sm font-medium mb-2">THE SOLUTION</div>
+                    <h2 class="text-2xl font-bold mb-4">Transform + monetize your content for AI</h2>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex items-start space-x-3">
+                            <div class="text-green-500 text-lg">•</div>
+                            <div>Restructure your articles into AI-optimized markdown formats</div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="text-green-500 text-lg">•</div>
+                            <div>Create monetized data streams that AI agents pay to access</div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="text-green-500 text-lg">•</div>
+                            <div>Automatic USDC payments for every AI data consumption event</div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="text-green-500 text-lg">•</div>
+                            <div><strong>Turn content transformation into recurring revenue</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section id="how-it-works" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Content transformation pipeline</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    We don't just paywall your content - we restructure it into AI-optimized data formats that agents actually want to pay for.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-brand/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Content Analysis</h3>
+                    <p class="text-gray-600 text-sm">AI analyzes your human-directed content and identifies key data structures</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-brand/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Data Transformation</h3>
+                    <p class="text-gray-600 text-sm">Restructures content into optimized markdown formats consumable by AI agents</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-brand/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Monetized Streams</h3>
+                    <p class="text-gray-600 text-sm">AI agents pay automatically to access your transformed data via USDC micropayments</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Details -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">Built for developers</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center mt-0.5">
+                                <div class="w-2 h-2 rounded-full bg-brand"></div>
+                            </div>
+                            <div>
+                                <div class="font-medium">x402 Protocol Integration</div>
+                                <div class="text-sm text-gray-600">HTTP-native crypto payments with one line of code</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center mt-0.5">
+                                <div class="w-2 h-2 rounded-full bg-brand"></div>
+                            </div>
+                            <div>
+                                <div class="font-medium">Base L2 Settlement</div>
+                                <div class="text-sm text-gray-600">Low-cost USDC transactions with instant finality</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center mt-0.5">
+                                <div class="w-2 h-2 rounded-full bg-brand"></div>
+                            </div>
+                            <div>
+                                <div class="font-medium">RESTful APIs</div>
+                                <div class="text-sm text-gray-600">Standard HTTP endpoints with comprehensive documentation</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center mt-0.5">
+                                <div class="w-2 h-2 rounded-full bg-brand"></div>
+                            </div>
+                            <div>
+                                <div class="font-medium">Enterprise Security</div>
+                                <div class="text-sm text-gray-600">SOC 2 compliance and enterprise-grade infrastructure</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="code-block rounded-lg p-6">
+                    <div class="text-sm text-gray-400 mb-4">AI Agent Integration Example</div>
+                    <pre><code class="text-sm text-gray-300">// Add to your AI agent
+import { CreatorPay } from '@creatorpay/sdk';
+
+const client = new CreatorPay({
+  apiKey: process.env.CREATORPAY_API_KEY,
+  wallet: process.env.AI_AGENT_WALLET
+});
+
+// Automatically handle paywalled content
+async function accessContent(url) {
+  const content = await client.getContent(url);
+  
+  if (content.paywall) {
+    // Auto-pay via x402 protocol
+    await client.pay({
+      amount: content.price,
+      recipient: content.creator
+    });
+    
+    return await client.getContent(url);
+  }
+  
+  return content;
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Use cases</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Enable new business models for AI-powered applications
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="stat-card bg-gray-50 rounded-lg p-6">
+                    <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold mb-2">Research Assistants</h3>
+                    <p class="text-sm text-gray-600">AI agents access academic papers and research for analysis</p>
+                </div>
+                
+                <div class="stat-card bg-gray-50 rounded-lg p-6">
+                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold mb-2">Content Curation</h3>
+                    <p class="text-sm text-gray-600">Automated newsletter generation with premium source material</p>
+                </div>
+                
+                <div class="stat-card bg-gray-50 rounded-lg p-6">
+                    <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold mb-2">Trading Bots</h3>
+                    <p class="text-sm text-gray-600">Real-time access to premium market analysis and signals</p>
+                </div>
+                
+                <div class="stat-card bg-gray-50 rounded-lg p-6">
+                    <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold mb-2">Quality Assurance</h3>
+                    <p class="text-sm text-gray-600">AI agents verify information against premium fact-checked sources</p>
+                </div>
+                
+                <div class="stat-card bg-gray-50 rounded-lg p-6">
+                    <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold mb-2">Competitive Intelligence</h3>
+                    <p class="text-sm text-gray-600">Monitor industry insights from premium analyst reports</p>
+                </div>
+                
+                <div class="stat-card bg-gray-50 rounded-lg p-6">
+                    <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2v1a2 2 0 002 2h2a2 2 0 002-2V3a2 2 0 012 2v6.5A1.5 1.5 0 0112.5 13H12v2.5a1.5 1.5 0 01-3 0V13h-.5A1.5 1.5 0 017 11.5V5z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold mb-2">Personal Assistants</h3>
+                    <p class="text-sm text-gray-600">AI assistants access specialized knowledge for user queries</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Transparent pricing</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Simple, predictable fees with no hidden costs
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- For Creators -->
+                <div class="bg-white rounded-lg border border-gray-200 p-8">
+                    <div class="text-center">
+                        <h3 class="text-lg font-semibold mb-2">For Creators</h3>
+                        <div class="text-4xl font-bold text-brand mb-1">20%</div>
+                        <div class="text-sm text-gray-500 mb-6">Platform fee on each transaction</div>
+                        
+                        <div class="space-y-3 text-sm">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Instant USDC payouts
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Analytics dashboard
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Custom pricing control
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                API access
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- For Developers -->
+                <div class="bg-white rounded-lg border border-gray-200 p-8">
+                    <div class="text-center">
+                        <h3 class="text-lg font-semibold mb-2">For Developers</h3>
+                        <div class="text-4xl font-bold text-brand mb-1">Free</div>
+                        <div class="text-sm text-gray-500 mb-6">Integration and API usage</div>
+                        
+                        <div class="space-y-3 text-sm">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Full API access
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                SDK libraries
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Documentation
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Developer support
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Request Access -->
+    <section id="request-access" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-6">Join Beta</h2>
+            <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+                Join our data transformation pipeline to restructure your content for AI consumption and create monetized data streams.
+            </p>
+            
+            <form onsubmit="handleRequestSubmit(event)" class="max-w-2xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <input 
+                        type="text" 
+                        placeholder="Full name" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
+                        required
+                    />
+                    <input 
+                        type="email" 
+                        placeholder="Work email" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
+                        required
+                    />
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <input 
+                        type="text" 
+                        placeholder="Company/Organization" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
+                        required
+                    />
+                    <select class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent" required>
+                        <option value="">Select use case</option>
+                        <option value="creator">I create premium content</option>
+                        <option value="developer">I build AI applications</option>
+                        <option value="enterprise">Enterprise integration</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <textarea 
+                    placeholder="Tell us about your use case (optional)"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent mb-6"
+                    rows="3"
+                ></textarea>
+                <button 
+                    type="submit" 
+                    class="w-full bg-brand text-white px-8 py-3 rounded-md font-medium hover:bg-brand-light transition-colors text-lg font-semibold"
+                >
+                    Join Beta Waitlist
+                </button>
+            </form>
+            
+            <div class="mt-8 text-sm text-gray-500">
+                Takes 2 minutes. Start earning immediately after approval.
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="bg-gray-950 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="md:col-span-2">
-                    <div class="text-2xl font-bold mb-4">🦀 CreatorPay</div>
-                    <p class="text-gray-400 mb-4">The first micropayment platform where AI agents automatically pay creators for premium content.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" onclick="shareOnTwitter()" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fab fa-twitter text-2xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fab fa-github text-2xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fab fa-discord text-2xl"></i>
-                        </a>
+                    <div class="text-xl font-bold mb-4">CreatorPay</div>
+                    <p class="text-gray-400 text-sm max-w-md">
+                        Content transformation for the AI economy. Converting human-directed content into monetized AI-consumable data streams.
+                    </p>
+                </div>
+                
+                <div>
+                    <div class="font-medium mb-4">Product</div>
+                    <div class="space-y-2 text-sm text-gray-400">
+                        <div><a href="#how-it-works" class="hover:text-white transition-colors">How it works</a></div>
+                        <div><a href="#pricing" class="hover:text-white transition-colors">Pricing</a></div>
+                        <div><a href="#" class="hover:text-white transition-colors">Documentation</a></div>
+                        <div><a href="#" class="hover:text-white transition-colors">API reference</a></div>
                     </div>
                 </div>
                 
                 <div>
-                    <h4 class="font-semibold mb-4">Platform</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">How It Works</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">API Docs</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Status</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Built With</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li>x402 Protocol</li>
-                        <li>Base L2</li>
-                        <li>USDC Payments</li>
-                        <li>MCP Integration</li>
-                    </ul>
+                    <div class="font-medium mb-4">Built with</div>
+                    <div class="space-y-2 text-sm text-gray-400">
+                        <div>x402 Protocol</div>
+                        <div>Base L2</div>
+                        <div>USDC Payments</div>
+                        <div>Enterprise security</div>
+                    </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2026 CreatorPay. Built by creators, for creators. 🦀</p>
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-sm text-gray-400">
+                    © 2026 CreatorPay. Built for creators, by creators.
+                </div>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <span class="sr-only">Twitter</span>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        // Navigation
-        function showSection(sectionName) {
-            // Scroll to section or show content
-            const element = document.getElementById(sectionName);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
+        function scrollToRequest() {
+            document.getElementById('request-access').scrollIntoView({ behavior: 'smooth' });
         }
         
-        function showWaitlist() {
-            document.querySelector('#waitlist-form').scrollIntoView({ behavior: 'smooth' });
-            document.getElementById('email').focus();
+        function scrollToDocs() {
+            document.getElementById('how-it-works').scrollIntoView({ behavior: 'smooth' });
         }
         
-        // Waitlist submission
-        function submitWaitlist() {
-            const email = document.getElementById('email').value;
-            const role = document.getElementById('role').value;
-            
-            if (!email || !email.includes('@')) {
-                alert('Please enter a valid email address');
-                return;
-            }
-            
-            // Hide form, show success
-            document.getElementById('waitlist-form').classList.add('hidden');
-            document.getElementById('waitlist-success').classList.remove('hidden');
+        function handleRequestSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
             
             // Store in localStorage for demo
-            localStorage.setItem('creatorpay-waitlist', JSON.stringify({
-                email: email,
-                role: role,
+            const requests = JSON.parse(localStorage.getItem('creatorpay-requests') || '[]');
+            const requestData = {
+                name: event.target.querySelector('input[placeholder="Full name"]').value,
+                email: event.target.querySelector('input[placeholder="Work email"]').value,
+                company: event.target.querySelector('input[placeholder="Company/Organization"]').value,
+                useCase: event.target.querySelector('select').value,
+                description: event.target.querySelector('textarea').value,
                 timestamp: new Date().toISOString()
-            }));
+            };
+            requests.push(requestData);
+            localStorage.setItem('creatorpay-requests', JSON.stringify(requests));
             
-            console.log('Waitlist signup:', { email, role });
+            // Show success message
+            alert('Thank you for your interest! We\'ll review your application and get back to you within 48 hours.');
+            event.target.reset();
         }
-        
-        // Social sharing
-        function shareOnTwitter() {
-            const text = "Just joined the CreatorPay beta waitlist! 🦀\n\nFinally, AI agents will pay creators for premium content with automatic USDC micropayments.\n\nThe future of the creator economy is here! 🚀";
-            const url = "https://creatorpay.netlify.app";
-            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
-            window.open(twitterUrl, '_blank');
-        }
-        
-        // Animate stats on scroll
-        function animateCounter(elementId, targetValue, duration = 2000) {
-            const element = document.getElementById(elementId);
-            if (!element) return;
-            
-            const isPrice = targetValue.toString().includes('$');
-            const numericValue = isPrice ? parseInt(targetValue.replace('$', '').replace(',', '')) : parseInt(targetValue);
-            
-            let currentValue = 0;
-            const increment = numericValue / (duration / 16); // 60fps
-            
-            const counter = setInterval(() => {
-                currentValue += increment;
-                if (currentValue >= numericValue) {
-                    currentValue = numericValue;
-                    clearInterval(counter);
-                }
-                
-                if (isPrice) {
-                    element.textContent = '$' + Math.floor(currentValue).toLocaleString();
-                } else {
-                    element.textContent = Math.floor(currentValue).toLocaleString();
-                }
-            }, 16);
-        }
-        
-        // Initialize counters when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                animateCounter('stat-creators', 127);
-                animateCounter('stat-payments', '$12847');
-                animateCounter('stat-agents', 43);
-                animateCounter('stat-content', 1284);
-            }, 500);
-        });
-        
-        // Easter eggs
-        let clickCount = 0;
-        document.addEventListener('click', (e) => {
-            if (e.target.textContent.includes('🦀')) {
-                clickCount++;
-                if (clickCount === 5) {
-                    alert('You found the crab easter egg! 🦀 CreatorPay is built by crab-powered AI agents.');
-                    clickCount = 0;
-                }
-            }
-        });
     </script>
 </body>
 </html>
