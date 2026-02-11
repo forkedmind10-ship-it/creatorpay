@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreatorPay - AI Agents Pay Creators</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-blue-600">🦀 CreatorPay</div>
+                </div>
+                <div class="flex space-x-4">
+                    <button onclick="showSection('browse')" class="text-gray-600 hover:text-blue-600">Browse Content</button>
+                    <button onclick="showSection('creators')" class="text-gray-600 hover:text-blue-600">For Creators</button>
+                    <button onclick="showSection('agents')" class="text-gray-600 hover:text-blue-600">For AI Agents</button>
+                    <button onclick="showSection('login')" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="bg-gradient-to-br from-blue-600 to-purple-700 text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl font-bold mb-6">AI Agents Pay Creators</h1>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">
+                The first micropayment platform where AI agents automatically pay creators for premium content. 
+                Built on x402 protocol with instant USDC payments on Base L2.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <button onclick="showSection('creators')" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
+                    Start Creating
+                </button>
+                <button onclick="showSection('agents')" class="border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600">
+                    Integrate AI Agent
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-3xl font-bold text-blue-600">127</div>
+                    <div class="text-gray-600">Creators Earning</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-green-600">$12,847</div>
+                    <div class="text-gray-600">Total Paid Out</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-purple-600">43</div>
+                    <div class="text-gray-600">AI Agents Connected</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-orange-600">1,284</div>
+                    <div class="text-gray-600">Premium Articles</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Browse Content Section -->
+    <section id="browse" class="py-16 bg-gray-50 hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">Premium Content Library</h2>
+            
+            <!-- Content Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Sample Content Cards -->
+                <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-sm text-gray-500">analysis</span>
+                        <span class="text-lg font-bold text-green-600">$0.05</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">The Future of AI Agent Economics</h3>
+                    <p class="text-gray-600 mb-4">A deep dive into how AI agents will reshape the creator economy through automated micropayments...</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">ai</span>
+                        <span class="px-2 py-1 text-xs rounded-full bg-purple-100 text-purple-800">economics</span>
+                        <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">agents</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-user mr-1"></i>
+                            Vitalik B.
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-eye mr-1"></i>
+                            847
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 text-sm">
+                            Preview
+                        </button>
+                        <button class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 text-sm">
+                            Purchase
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-sm text-gray-500">tutorial</span>
+                        <span class="text-lg font-bold text-green-600">$0.03</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Building with x402 Protocol</h3>
+                    <p class="text-gray-600 mb-4">Technical tutorial on implementing HTTP-native crypto payments for your applications...</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 text-xs rounded-full bg-purple-100 text-purple-800">x402</span>
+                        <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">crypto</span>
+                        <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">payments</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-user mr-1"></i>
+                            Dev Master
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-eye mr-1"></i>
+                            623
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 text-sm">
+                            Preview
+                        </button>
+                        <button class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 text-sm">
+                            Purchase
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-sm text-gray-500">research</span>
+                        <span class="text-lg font-bold text-green-600">$0.08</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Base L2 Performance Analysis</h3>
+                    <p class="text-gray-600 mb-4">Comprehensive benchmarking of Base L2 for micropayment applications and throughput...</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">base</span>
+                        <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">l2</span>
+                        <span class="px-2 py-1 text-xs rounded-full bg-orange-100 text-orange-800">performance</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-user mr-1"></i>
+                            Chain Analyst
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-eye mr-1"></i>
+                            291
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 text-sm">
+                            Preview
+                        </button>
+                        <button class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 text-sm">
+                            Purchase
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Banner for Demo -->
+    <section id="demo-banner" class="bg-yellow-100 border-t border-b border-yellow-300 py-4">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-yellow-800">
+                🚧 <strong>Demo Version</strong> - This is a preview of CreatorPay. Full platform launching soon with real payments and AI agent integration!
+            </p>
+        </div>
+    </section>
+
+    <!-- Simple JavaScript for navigation -->
+    <script>
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = ['hero', 'browse', 'creators', 'agents', 'login'];
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                if (element) {
+                    if (section === sectionName) {
+                        element.classList.remove('hidden');
+                    } else {
+                        element.classList.add('hidden');
+                    }
+                }
+            });
+
+            // Show hero by default if no specific section
+            if (!sectionName || sectionName === 'home') {
+                document.getElementById('hero').classList.remove('hidden');
+            }
+        }
+
+        // Show coming soon alerts for interactive elements
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('button') && e.target.textContent.includes('Purchase')) {
+                alert('🦀 Coming Soon! CreatorPay will launch with real USDC payments and AI agent integration.');
+            }
+            if (e.target.matches('button') && e.target.textContent.includes('Preview')) {
+                alert('This would show a free preview of the content. Full platform launching soon!');
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="text-xl font-bold mb-4">🦀 CreatorPay</div>
+                <p class="text-gray-400 mb-4">AI agents pay creators through automated micropayments.</p>
+                <p class="text-sm text-gray-500">Demo • Full platform launching soon</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
