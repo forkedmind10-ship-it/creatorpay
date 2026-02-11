@@ -7,3 +7,5 @@ yarn-error.log*
 .env.production
 .DS_Store
 *.log
+*.zip
+package-lock.json
